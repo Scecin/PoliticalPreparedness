@@ -11,23 +11,22 @@ interface ElectionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertElection(election: Election)
 
-    //DONE: Add select all election query
+    // Select all election query
     @Query("select * from election_table ORDER BY electionDay")
     fun getAllElections(): LiveData<List<Election>>
 
-    @Query("SELECT * FROM election_table ORDER BY electionDay")
-    suspend fun getElections(): List<Election>
-
-    //TODO: Add select single election query
+    @Query("SELECT * FROM election_table WHERE id = :id ")
+    suspend fun getElectionById(id:Int): Election?
 
 
     @Query("insert into election_table (id) values(:electionId)")
     suspend fun followElection(electionId: Int)
 
+    // Select a single election query
+    @Query("SELECT EXISTS (SELECT 1 FROM election_table WHERE id = :id)")
+    fun exists(id: String): Boolean
+
     // Delete query
-    @Query("DELETE from election_table WHERE id = :id")
-    fun unfollow(id: String)
-
-    //TODO: Add clear query
-
+    @Delete
+    fun unfollow(election: Election)
 }

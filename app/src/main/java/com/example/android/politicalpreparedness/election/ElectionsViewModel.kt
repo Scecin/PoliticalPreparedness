@@ -11,7 +11,6 @@ import com.example.android.politicalpreparedness.network.CivicsApiService
 import com.example.android.politicalpreparedness.network.models.Election
 import com.example.android.politicalpreparedness.repository.ElectionsRepository
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.ArrayList
 
 
@@ -45,12 +44,10 @@ class ElectionsViewModel(application: Application): AndroidViewModel(application
                 val electionList = apiService.getElections()
                 upcomingElections.value = electionList.elections
             } catch (e: Exception) {
-                Timber.e("Error: %s", e.localizedMessage)
                 upcomingElections.value = ArrayList()
             }
         }
     }
-
 
     // Functions to navigate to saved or upcoming election voter info
     fun onElectionClicked(election: Election) {

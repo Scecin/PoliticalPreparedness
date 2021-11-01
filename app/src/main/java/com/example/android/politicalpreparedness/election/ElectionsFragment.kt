@@ -20,15 +20,17 @@ class ElectionsFragment : Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        // ViewModel declaration and values and create ViewModel
+        val viewModelFactory = ElectionsViewModelFactory(requireActivity().application)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(ElectionsViewModel::class.java)
 
         // Binding values
         binding = FragmentElectionBinding.inflate(inflater)
         binding.lifecycleOwner = this
-
-        val viewModelFactory = ElectionsViewModelFactory(requireActivity().application)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(ElectionsViewModel::class.java)
-
         binding.viewModel = viewModel
+
+
+        // Recycler adapters
         /**
          * Upcoming Elections
          */

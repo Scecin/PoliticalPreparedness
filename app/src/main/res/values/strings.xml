@@ -2,10 +2,11 @@
 <resources>
     <string name="app_name">Political Preparedness</string>
 
-    <!-- Buttons -->
+    <!-- Button Texts -->
     <string name="upcoming_button">Upcoming elections</string>
     <string name="representatives_button">Find my representatives</string>
     <string name="follow_button">Follow election</string>
+    <string name="unfollow_button">Unfollow election</string>
     <string name="location_button">Use my location</string>
 
     <!-- Titles -->
