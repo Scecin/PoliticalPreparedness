@@ -21,7 +21,7 @@ class VoterInfoFragment : Fragment() {
 
 
         val application = requireActivity().application
-        val database= ElectionDatabase.getInstance(application)
+//        val database= ElectionDatabase.getInstance(application)
 //        val repository = ElectionsRepository (database)
 
         val arg = VoterInfoFragmentArgs.fromBundle(requireArguments())

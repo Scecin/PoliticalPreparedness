@@ -30,7 +30,7 @@ class ElectionsViewModel(application: Application): AndroidViewModel(application
     // Live data val for upcoming elections
     val upcomingElections = MutableLiveData<List<Election>>()
     // Live data val for saved elections
-    val savedElections = electionsRepository.savedElections
+    val savedElections = database.electionDao.getAllElections()
 
 
 

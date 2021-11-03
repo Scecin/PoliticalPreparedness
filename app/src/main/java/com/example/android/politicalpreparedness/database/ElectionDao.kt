@@ -18,15 +18,7 @@ interface ElectionDao {
     @Query("SELECT * FROM election_table WHERE id = :id ")
     suspend fun getElectionById(id:Int): Election?
 
-
-    @Query("insert into election_table (id) values(:electionId)")
-    suspend fun followElection(electionId: Int)
-
-    // Select a single election query
-    @Query("SELECT EXISTS (SELECT 1 FROM election_table WHERE id = :id)")
-    fun exists(id: String): Boolean
-
     // Delete query
     @Delete
-    fun unfollow(election: Election)
+    fun delete(election: Election)
 }

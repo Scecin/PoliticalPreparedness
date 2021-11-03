@@ -84,14 +84,88 @@
             style="@style/HeaderTextView"/>
 
         <TextView
-            android:id="@+id/address"
+            android:id="@+id/address_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/state_correspondence_header"
             app:layout_constraintStart_toStartOf="@id/election_date"
             android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:text="Address: "
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/state_correspondence_header"
+            app:layout_constraintStart_toEndOf="@id/address_header"
+            android:layout_marginTop="@dimen/big_margin"
+            android:layout_marginBottom="@dimen/big_margin"
+            android:text="@{viewModel.voterInfo.state[0].electionAdministrationBody.correspondenceAddress.line1}"
             tools:text="Address"/>
-        <!--            android:text="@{viewModel.getAddress}"-->
+
+        <TextView
+            android:id="@+id/city_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:text="City: "
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/election_date"
+            app:layout_constraintTop_toBottomOf="@+id/address" />
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/address"
+            app:layout_constraintStart_toEndOf="@+id/city_header"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@{viewModel.voterInfo.state[0].electionAdministrationBody.correspondenceAddress.city}"
+            tools:text="City"/>
+
+        <TextView
+            android:id="@+id/state_header_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/city_header"
+            app:layout_constraintStart_toStartOf="@id/election_date"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginStart="@dimen/big_margin"
+            android:text="State: "
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/city"
+            app:layout_constraintStart_toEndOf="@+id/state_header_info"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@{viewModel.voterInfo.state[0].electionAdministrationBody.correspondenceAddress.state}"
+            tools:text="State"/>
+
+        <TextView
+            android:id="@+id/zip_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:text="Zip: "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/zip"
+            app:layout_constraintStart_toStartOf="@id/election_date"
+            app:layout_constraintTop_toBottomOf="@+id/state" />
+
+        <TextView
+            android:id="@+id/zip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/state"
+            app:layout_constraintStart_toEndOf="@+id/zip_header"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@{viewModel.voterInfo.state[0].electionAdministrationBody.correspondenceAddress.zip}"
+            tools:text="Zip"/>
 
         <Button
             android:id="@+id/follow_election_button"
@@ -100,7 +174,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/unfollow_election_button"
-            android:onClick="@{() -> viewModel.followElection(viewModel.voterInfo.election)}"
+            android:onClick="@{() -> viewModel.followElection()}"
             android:text="@string/follow_button"
             style="@style/Buttons"/>
 
@@ -109,7 +183,7 @@
             android:id="@+id/unfollow_election_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.unfollowElection(viewModel.voterInfo.election)}"
+            android:onClick="@{() -> viewModel.unfollowElection()}"
             android:text="@string/unfollow_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
