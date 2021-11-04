@@ -183,7 +183,7 @@
             android:id="@+id/unfollow_election_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.unfollowElection()}"
+            android:onClick="@{() -> viewModel.unFollowElection()}"
             android:text="@string/unfollow_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
