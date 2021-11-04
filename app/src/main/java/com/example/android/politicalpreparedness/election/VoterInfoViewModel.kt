@@ -6,6 +6,7 @@ import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.models.*
 import com.example.android.politicalpreparedness.repository.ElectionsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class VoterInfoViewModel(electionId: Int, division: Division, application: Application) : ViewModel() {
@@ -89,8 +90,8 @@ class VoterInfoViewModel(electionId: Int, division: Division, application: Appli
         _isElectionFollowed.value = true
     }
 
-    fun unfollowElection() {
-        viewModelScope.launch {
+    fun unFollowElection() {
+        viewModelScope.launch(Dispatchers.IO) {
             election.value?.let { database.electionDao.delete(it) }
         }
         _isElectionFollowed.value = false
