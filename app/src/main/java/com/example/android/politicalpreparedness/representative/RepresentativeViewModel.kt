@@ -1,12 +1,36 @@
 package com.example.android.politicalpreparedness.representative
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.android.politicalpreparedness.network.CivicsApi
+import com.example.android.politicalpreparedness.network.CivicsApiService
+import com.example.android.politicalpreparedness.network.models.Address
+import com.example.android.politicalpreparedness.representative.model.Representative
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class RepresentativeViewModel: ViewModel() {
+class RepresentativeViewModel : ViewModel() {
 
-    //TODO: Establish live data for representatives and address
+    // Live data for representatives and address
+    private val _representatives = MutableLiveData<List<Representative>>()
+    val representatives: LiveData<List<Representative>>
+        get() = _representatives
 
-    //TODO: Create function to fetch representatives from API from a provided address
+    private val _address = MutableLiveData<Address>()
+    val address: LiveData<Address>
+        get() = _address
+    private val _showSnackBar = MutableLiveData<Boolean>()
+    val showSnackBar: LiveData<Boolean>
+        get() = _showSnackBar
+
+    val apiService: CivicsApiService = CivicsApi.retrofitService
+
+    init {
+        _address.value = Address("", "", "", "", "")
+//        fetchRepresentatives()
+    }
 
     /**
      *  The following code will prove helpful in constructing a representative from the API. This code combines the two nodes of the RepresentativeResponse into a single official :
@@ -19,8 +43,31 @@ class RepresentativeViewModel: ViewModel() {
 
      */
 
-    //TODO: Create function get address from geo location
+    // Function to fetch representatives from API from a provided address
+    fun fetchRepresentatives(address: Address?) {
+        address.let {
+            viewModelScope.launch {
+                try {
+                    _address.value = address!!
+                    // in try catch so just assert
+                    val (offices, officials) = apiService.getRepresentatives(_address.value!!.toFormattedString())
+                    _representatives.value = offices.flatMap { office ->
+                        office.getRepresentatives(
+                                officials
+                        )
+                    }
+                } catch (e: Exception) {
+                    Timber.e("Error fetching representatives")
+                }
+            }
+        }
+    }
 
-    //TODO: Create function to get address from individual fields
-
+    // function get address from geo location
+    fun getAddressFromLocation() {
+        fetchRepresentatives(_address.value)
+    }
 }
+
+
+//TODO: Create function to get address from individual fields
