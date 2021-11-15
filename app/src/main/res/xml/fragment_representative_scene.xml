@@ -11,10 +11,7 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@id/representative_layout"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent" />
+        <Constraint android:id="@id/representative_layout"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
