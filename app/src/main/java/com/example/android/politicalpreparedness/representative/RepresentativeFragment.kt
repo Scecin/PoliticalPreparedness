@@ -54,7 +54,7 @@ class DetailFragment : Fragment() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         binding.buttonSearch.setOnClickListener {
-            viewModel.getAddressFromLocation()
+            viewModel.fetchRepresentatives()
             hideKeyboard()
         }
 
@@ -62,7 +62,6 @@ class DetailFragment : Fragment() {
         binding.buttonLocation.setOnClickListener {
             if (checkLocationPermissions()) {
                 getLocation()
-                viewModel.getAddressFromLocation()
             }
         }
 
@@ -134,7 +133,7 @@ class DetailFragment : Fragment() {
                     .addOnSuccessListener(requireActivity()) { location ->
                 location?.let {
                     val geoLocation = geoCodeLocation(location)
-                    viewModel.fetchRepresentatives(geoLocation)
+                    viewModel.getAddressFromLocation(geoLocation)
                 }
             }
         } else {

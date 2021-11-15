@@ -44,13 +44,13 @@ class RepresentativeViewModel : ViewModel() {
      */
 
     // Function to fetch representatives from API from a provided address
-    fun fetchRepresentatives(address: Address?) {
-        address.let {
+    fun fetchRepresentatives() {
             viewModelScope.launch {
+                _address.value?.let {
                 try {
-                    _address.value = address!!
+                    val address = _address.value!!.toFormattedString()
                     // in try catch so just assert
-                    val (offices, officials) = apiService.getRepresentatives(_address.value!!.toFormattedString())
+                    val (offices, officials) = apiService.getRepresentatives(address)
                     _representatives.value = offices.flatMap { office ->
                         office.getRepresentatives(
                                 officials
@@ -64,8 +64,8 @@ class RepresentativeViewModel : ViewModel() {
     }
 
     // function get address from geo location
-    fun getAddressFromLocation() {
-        fetchRepresentatives(_address.value)
+    fun getAddressFromLocation(address: Address) {
+        _address.value = address
     }
 }
 

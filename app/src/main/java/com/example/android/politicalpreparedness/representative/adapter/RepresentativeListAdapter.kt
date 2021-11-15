@@ -60,7 +60,7 @@ class RepresentativeViewHolder(val binding: ViewholderRepresentativeBinding): Re
     }
 
     private fun showWWWLinks(urls: List<String>) {
-        enableLink(binding.wwwIcon, urls.first())
+        enableLink(binding.webIcon, urls.first())
     }
 
     private fun getFacebookUrl(channels: List<Channel>): String? {

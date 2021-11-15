@@ -76,7 +76,7 @@
             app:srcCompat="@drawable/ic_facebook" />
 
         <ImageView
-            android:id="@+id/www_icon"
+            android:id="@+id/web_icon"
             android:layout_width="@dimen/social_media_icon"
             android:layout_height="@dimen/social_media_icon"
             android:layout_marginEnd="@dimen/default_margin"
