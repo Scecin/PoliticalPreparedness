@@ -70,9 +70,7 @@ class DetailFragment : Fragment() {
         binding.representativeList.adapter = representativeAdapter
 
         viewModel.representatives.observe(viewLifecycleOwner, Observer {
-            it.let {
-                representativeAdapter.submitList(it)
-            }
+            representativeAdapter.submitList(it)
         })
 
         // spinner

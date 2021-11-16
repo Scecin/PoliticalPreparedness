@@ -22,8 +22,6 @@ class RepresentativeViewModel : ViewModel() {
     val address: LiveData<Address>
         get() = _address
     private val _showSnackBar = MutableLiveData<Boolean>()
-    val showSnackBar: LiveData<Boolean>
-        get() = _showSnackBar
 
     val apiService: CivicsApiService = CivicsApi.retrofitService
 
