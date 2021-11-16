@@ -9,7 +9,6 @@ import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.network.CivicsApi
 import com.example.android.politicalpreparedness.network.CivicsApiService
 import com.example.android.politicalpreparedness.network.models.Election
-import com.example.android.politicalpreparedness.repository.ElectionsRepository
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
@@ -20,7 +19,6 @@ class ElectionsViewModel(application: Application): AndroidViewModel(application
 
     // Construct ViewModel and provide election datasource
     private val database = ElectionDatabase.getInstance(application)
-    private val electionsRepository = ElectionsRepository(database)
 
     private val _navigateToElection = MutableLiveData<Election?>()
     val navigateToElection : LiveData<Election?>

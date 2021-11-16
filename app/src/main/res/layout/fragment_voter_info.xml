@@ -173,20 +173,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/unfollow_election_button"
-            android:onClick="@{() -> viewModel.followElection()}"
-            android:text="@string/follow_button"
-            style="@style/Buttons"/>
-
-
-        <Button
-            android:id="@+id/unfollow_election_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.unFollowElection()}"
-            android:text="@string/unfollow_button"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/follow_button"
             style="@style/Buttons"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

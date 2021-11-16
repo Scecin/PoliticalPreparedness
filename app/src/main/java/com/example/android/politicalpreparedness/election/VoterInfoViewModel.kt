@@ -88,15 +88,15 @@ class VoterInfoViewModel(electionId: Int, division: Division, application: Appli
     // Methods to save and remove elections to local database
     fun followElection() {
         viewModelScope.launch {
-            election.value?.let { database.electionDao.insertElection(it) }
+            if (isElectionFollowed.value == true) {
+                election.value?.let { database.electionDao.insertElection(it) }
+                _isElectionFollowed.value = false
+            } else {
+                viewModelScope.launch(Dispatchers.IO) {
+                    election.value?.let { database.electionDao.delete(it) }
+                }
+                _isElectionFollowed.value = true
+            }
         }
-        _isElectionFollowed.value = true
-    }
-
-    fun unFollowElection() {
-        viewModelScope.launch(Dispatchers.IO) {
-            election.value?.let { database.electionDao.delete(it) }
-        }
-        _isElectionFollowed.value = false
     }
 }
