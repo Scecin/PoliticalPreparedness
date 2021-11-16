@@ -21,7 +21,6 @@ class RepresentativeViewModel : ViewModel() {
     private val _address = MutableLiveData<Address>()
     val address: LiveData<Address>
         get() = _address
-    private val _showSnackBar = MutableLiveData<Boolean>()
 
     val apiService: CivicsApiService = CivicsApi.retrofitService
 
@@ -66,6 +65,5 @@ class RepresentativeViewModel : ViewModel() {
         _address.value = address
     }
 }
-
 
 //TODO: Create function to get address from individual fields

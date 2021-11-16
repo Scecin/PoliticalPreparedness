@@ -4,11 +4,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.database.ElectionDatabase
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
 import com.example.android.politicalpreparedness.repository.ElectionsRepository
+import com.google.android.material.snackbar.Snackbar
 
 class VoterInfoFragment : Fragment() {
 
@@ -21,9 +25,6 @@ class VoterInfoFragment : Fragment() {
 
 
         val application = requireActivity().application
-//        val database= ElectionDatabase.getInstance(application)
-//        val repository = ElectionsRepository (database)
-
         val arg = VoterInfoFragmentArgs.fromBundle(requireArguments())
         val electionId = arg.argElectionId
         val division = arg.argDivision
@@ -59,9 +60,11 @@ class VoterInfoFragment : Fragment() {
                 if (it) {
                     binding.followElectionButton.visibility = View.GONE
                     binding.unfollowElectionButton.visibility = View.VISIBLE
+                    Toast.makeText(context, R.string.follow_button, Toast.LENGTH_LONG).show()
                 } else {
                     binding.followElectionButton.visibility = View.VISIBLE
                     binding.unfollowElectionButton.visibility = View.GONE
+                    Toast.makeText(context, R.string.unfollow_button, Toast.LENGTH_LONG).show()
                 }
             }
         })

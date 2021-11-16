@@ -23,7 +23,6 @@ class VoterInfoViewModel(electionId: Int, division: Division, application: Appli
     val voterInfo: LiveData<VoterInfoResponse>
         get() = _voterInfo
 
-
     private val _election = MutableLiveData<Election>()
     val election: LiveData<Election>
         get() = _election
